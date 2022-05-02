@@ -1,0 +1,9 @@
+registry:
+  images:
+    argocd: ghcr.io/krateoplatformops/argocd-service:latest
+
+log:
+  level: "info"
+
+uris:
+  endpoint: "http://endpoint-svc.krateo.svc"
