@@ -2,7 +2,10 @@ const { logger } = require('../helpers/logger.helpers')
 const { pathConstants } = require('../constants')
 
 module.exports = (req, res, next) => {
-  logger.info(`${req.path} - ${req.method} - ${req.ip}`)
+  if (pathConstants.nologPaths.includes(req.path)) {
+    next()
+    return
+  }
 
   if (Object.keys(req.body).length > 0) {
     logger.debug(JSON.stringify(req.body))
