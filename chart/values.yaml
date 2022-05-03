@@ -5,5 +5,5 @@ registry:
 log:
   level: "info"
 
-uris:
-  endpoint: "http://endpoint-svc.krateo.svc"
+argocd:
+  host: "argocd.krateo.site"
