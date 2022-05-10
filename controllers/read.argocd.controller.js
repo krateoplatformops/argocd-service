@@ -29,7 +29,7 @@ router.get('/:name', async (req, res, next) => {
         await axios.get(url.toString(), {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${bearer.value}`
+            Authorization: `Bearer ${bearer.val}`
           }
         })
       ).data
@@ -43,7 +43,7 @@ router.get('/:name', async (req, res, next) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${bearer.value}`
+            Authorization: `Bearer ${bearer.val}`
           }
         }
       )
