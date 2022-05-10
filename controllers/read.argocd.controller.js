@@ -16,6 +16,8 @@ router.get('/:name', async (req, res, next) => {
     const endpoint = (await axios.get(endpointUrl)).data
     let content = null
 
+    const bearer = endpoint.secret.find((x) => x.key === 'bearer')
+
     if (req.query['name']) {
       let url = new URL(
         uriHelpers.concatUrl([endpoint.target, req.params.name, 'resource'])
@@ -25,7 +27,10 @@ router.get('/:name', async (req, res, next) => {
       )
       content = (
         await axios.get(url.toString(), {
-          headers: endpoint.headers
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${bearer.value}`
+          }
         })
       ).data
     } else {
@@ -36,7 +41,10 @@ router.get('/:name', async (req, res, next) => {
           'resource-tree'
         ]),
         {
-          headers: endpoint.headers
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${bearer.value}`
+          }
         }
       )
       content = argocdHelpers.nodeEdges(tree.data, req.params.name)
