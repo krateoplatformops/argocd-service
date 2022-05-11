@@ -1,7 +1,7 @@
 {
-  "name": "git-service",
+  "name": "argocd-service",
   "version": "0.1.0",
-  "description": "Krateo Git Service",
+  "description": "Krateo Argocd Service",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
