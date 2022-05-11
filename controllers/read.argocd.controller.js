@@ -2,18 +2,13 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const uriHelpers = require('../helpers/uri.helpers')
-const { envConstants } = require('../constants')
 const argocdHelpers = require('../helpers/argocd.helpers')
+const stringHelpers = require('../helpers/string.helpers')
 
-router.get('/:name', async (req, res, next) => {
+router.get('/:endpoint/:name', async (req, res, next) => {
   try {
-    const endpointUrl = uriHelpers.concatUrl([
-      envConstants.ENDPOINT_URI,
-      'type',
-      'argocd'
-    ])
-
-    const endpoint = (await axios.get(endpointUrl)).data
+    console.log(stringHelpers.b64toAscii(req.params.endpoint))
+    const endpoint = JSON.parse(stringHelpers.b64toAscii(req.params.endpoint))
     let content = null
 
     const bearer = endpoint.secret.find((x) => x.key === 'bearer')
