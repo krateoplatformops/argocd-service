@@ -11,7 +11,9 @@ router.get('/:endpoint/:name', async (req, res, next) => {
     const endpoint = JSON.parse(stringHelpers.b64toAscii(req.params.endpoint))
     let content = null
 
-    const bearer = endpoint.secret.find((x) => x.key === 'bearer')
+    const bearer = endpoint.secret.find(
+      (x) => x.key === 'bearer' || x.key === 'authToken'
+    )
 
     if (req.query['name']) {
       let url = new URL(
