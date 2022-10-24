@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@kubernetes/client-node": "^0.17.0",
     "axios": "^0.26.1",
     "cors": "^2.8.5",
     "dagre": "^0.8.5",
