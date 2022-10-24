@@ -32,7 +32,11 @@ router.get('/:endpoint/:name', async (req, res, next) => {
       content = (await axios.get(url.toString(), headers)).data
     } else {
       const tree = await axios.get(
-        uriHelpers.concatUrl([endpoint.target, req.params.name]),
+        uriHelpers.concatUrl([
+          endpoint.target,
+          req.params.name,
+          'resource-tree'
+        ]),
         headers
       )
       content = argocdHelpers.nodeEdges(tree.data, req.params.name)
