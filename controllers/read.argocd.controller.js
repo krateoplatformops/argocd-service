@@ -24,21 +24,27 @@ router.get('/:endpoint/:name', async (req, res, next) => {
     let content = null
     if (req.query.name) {
       const url = new URL(
-        uriHelpers.concatUrl([endpoint.target, req.params.name, 'resource'])
+        uriHelpers.concatUrl([
+          endpoint.target,
+          'api/v1/applications/',
+          req.params.name,
+          'resource'
+        ])
       )
+      logger.debug(url)
       Object.keys(req.query).forEach((key) =>
         url.searchParams.append(key, req.query[key])
       )
       content = (await axios.get(url.toString(), headers)).data
     } else {
-      const tree = await axios.get(
-        uriHelpers.concatUrl([
-          endpoint.target,
-          req.params.name,
-          'resource-tree'
-        ]),
-        headers
-      )
+      const url = uriHelpers.concatUrl([
+        endpoint.target,
+        'api/v1/applications/',
+        req.params.name,
+        'resource-tree'
+      ])
+      logger.debug(url)
+      const tree = await axios.get(url, headers)
       content = argocdHelpers.nodeEdges(tree.data, req.params.name)
     }
 
